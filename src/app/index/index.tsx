@@ -1,4 +1,4 @@
-import { Image, View, TouchableOpacity } from "react-native";
+import { Image, View, TouchableOpacity, FlatList } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import styles from "./styles";
 import { colors } from "@/styles/colors";
@@ -15,11 +15,22 @@ export default function Index() {
           <MaterialIcons name="add" size={32} color={colors.green[300]} />
         </TouchableOpacity>
       </View>
+
       <Categories />
-      <Link
-        name="Google"
-        url="https://www.google.com"
-        onDetails={() => console.log("Clicou")}
+
+      <FlatList
+        data={["1", "2", "3", "4", "5"]}
+        keyExtractor={(item) => item}
+        renderItem={() => (
+          <Link
+            name="Google"
+            url="https://www.google.com.br/?hl=pt-BR"
+            onDetails={() => {}}
+          />
+        )}
+        style={styles.links}
+        contentContainerStyle={styles.linksContent}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
