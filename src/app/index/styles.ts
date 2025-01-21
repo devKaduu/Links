@@ -1,13 +1,14 @@
 import { colors } from "@/styles/colors";
+import { scaleFont } from "@/utils/scaleFont";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 62,
+    paddingTop: 80,
   },
   title: {
-    fontSize: 22,
+    fontSize: scaleFont(22),
     color: colors.green[900],
   },
   header: {
@@ -50,17 +51,17 @@ const styles = StyleSheet.create({
   },
   modalCategory: {
     flex: 1,
-    fontSize: 16,
+    fontSize: scaleFont(16),
     fontWeight: "500",
     color: colors.gray[400],
   },
   modalLinkName: {
-    fontSize: 18,
+    fontSize: scaleFont(18),
     fontWeight: "600",
     color: colors.gray[200],
   },
   modalUrl: {
-    fontSize: 14,
+    fontSize: scaleFont(14),
     color: colors.gray[400],
   },
   modalFooter: {

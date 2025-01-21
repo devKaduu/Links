@@ -1,3 +1,4 @@
+import { scaleFont } from "@/utils/scaleFont";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -7,7 +8,7 @@ export const styles = StyleSheet.create({
     gap: 5,
   },
   name: {
-    fontSize: 16,
+    fontSize: scaleFont(16),
     fontWeight: 600,
   },
 });

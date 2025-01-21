@@ -1,11 +1,12 @@
 import { StyleSheet } from "react-native";
 
 import { colors } from "../../styles/colors";
+import { scaleFont } from "@/utils/scaleFont";
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 62,
+    paddingTop: 80,
   },
   header: {
     flexDirection: "row",
@@ -15,12 +16,12 @@ export const styles = StyleSheet.create({
   },
   title: {
     color: colors.gray[200],
-    fontSize: 24,
+    fontSize: scaleFont(24),
     fontWeight: "600",
   },
   label: {
     color: colors.gray[400],
-    fontSize: 14,
+    fontSize: scaleFont(14),
     paddingHorizontal: 24,
   },
   form: {
@@ -28,3 +29,5 @@ export const styles = StyleSheet.create({
     gap: 16,
   },
 });
+
+export default styles;

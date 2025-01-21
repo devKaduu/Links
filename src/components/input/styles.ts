@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 import { colors } from "@/styles/colors";
+import { scaleFont } from "@/utils/scaleFont";
 
 export const styles = StyleSheet.create({
   container: {
@@ -12,6 +13,6 @@ export const styles = StyleSheet.create({
     borderColor: colors.gray[800],
     padding: 10,
     color: colors.gray[100],
-    fontSize: 16,
+    fontSize: scaleFont(16),
   },
 });
