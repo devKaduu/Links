@@ -1,4 +1,4 @@
-import { scaleFont } from "@/utils/scaleFont";
+import { scaleFont } from "@/utils/scale-font";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
