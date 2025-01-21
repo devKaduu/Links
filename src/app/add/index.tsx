@@ -1,19 +1,29 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { View, Text, TouchableOpacity } from "react-native";
-import style from "./styles";
+import { styles } from "./styles";
 import { colors } from "@/styles/colors";
 import { router } from "expo-router";
+import { Categories } from "@/components/categories";
+import { Input } from "@/components/input";
 
 export default function Add() {
   return (
-    <View style={style.container}>
-      <View style={style.header}>
+    <View style={styles.container}>
+      <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <MaterialIcons name="arrow-back" size={32} color={colors.gray[200]} />
         </TouchableOpacity>
-        <Text style={style.title}>Novo</Text>
+        <Text style={styles.title}>Novo</Text>
       </View>
-      <Text style={style.label}>Selecione uma categoria</Text>
+
+      <Text style={styles.label}>Selecione uma categoria</Text>
+
+      <Categories />
+
+      <View style={styles.form}>
+        <Input placeholder="Nome da URL" />
+        <Input placeholder="URL" />
+      </View>
     </View>
   );
 }

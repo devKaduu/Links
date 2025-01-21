@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 import { colors } from "../../styles/colors";
 
-const style = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 62,
@@ -23,6 +23,8 @@ const style = StyleSheet.create({
     fontSize: 14,
     paddingHorizontal: 24,
   },
+  form: {
+    padding: 24,
+    gap: 16,
+  },
 });
-
-export default style;

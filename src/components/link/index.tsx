@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import { style } from "./styles";
+import { styles } from "./styles";
 import { colors } from "@/styles/colors";
 
 interface LinksProps {
@@ -12,12 +12,12 @@ interface LinksProps {
 
 export function Link({ name, url, onDetails }: LinksProps) {
   return (
-    <View style={style.container}>
-      <View style={style.details}>
-        <Text style={style.name} numberOfLines={1}>
+    <View style={styles.container}>
+      <View style={styles.details}>
+        <Text style={styles.name} numberOfLines={1}>
           {name}
         </Text>
-        <Text style={style.url} numberOfLines={1}>
+        <Text style={styles.url} numberOfLines={1}>
           {url}
         </Text>
       </View>
