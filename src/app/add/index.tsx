@@ -1,4 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons";
+import { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { colors } from "@/styles/colors";
@@ -8,6 +9,18 @@ import { Input } from "@/components/input";
 import { Button } from "@/components/button";
 
 export default function Add() {
+  const [category, setCategory] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [url, setUrl] = useState<string>("");
+
+  function handleAdd() {
+    console.log({
+      name,
+      url,
+      category,
+    });
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -19,12 +32,12 @@ export default function Add() {
 
       <Text style={styles.label}>Selecione uma categoria</Text>
 
-      <Categories />
+      <Categories onChange={setCategory} selected={category} />
 
       <View style={styles.form}>
-        <Input placeholder="Nome da URL" />
-        <Input placeholder="URL" />
-        <Button title="Adicionar" />
+        <Input placeholder="Nome da URL" onChangeText={setName} autoCorrect={false} />
+        <Input placeholder="URL" onChangeText={setUrl} autoCorrect={false} />
+        <Button title="Adicionar" onPress={handleAdd} />
       </View>
     </View>
   );
