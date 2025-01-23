@@ -7,27 +7,34 @@ import { router } from "expo-router";
 import { Categories } from "@/components/categories";
 import { Input } from "@/components/input";
 import { Button } from "@/components/button";
+import { persistDataLinks } from "@/utils/storage";
 
 export default function Add() {
   const [category, setCategory] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [url, setUrl] = useState<string>("");
 
-  function handleAdd() {
-    if (!category) {
-      return Alert.alert("Categoria", "Selecione uma categoria antes de adicionar");
+  async function handleAdd(): Promise<void> {
+    try {
+      if (!category) {
+        return Alert.alert("Categoria", "Selecione uma categoria antes de adicionar");
+      }
+      if (!name.trim()) {
+        return Alert.alert("Nome", "Insira um nome para o link");
+      }
+      if (!url.trim()) {
+        return Alert.alert("URL", "Insira um URL para o link");
+      }
+
+      await persistDataLinks({
+        id: new Date().getTime().toString(),
+        name,
+        url,
+        category,
+      });
+    } catch (error) {
+      Alert.alert("Erro", "Ocorreu um erro ao adicionar o link");
     }
-    if (!name.trim()) {
-      return Alert.alert("Nome", "Insira um nome para o link");
-    }
-    if (!url.trim()) {
-      return Alert.alert("URL", "Insira um URL para o link");
-    }
-    console.log({
-      name,
-      url,
-      category,
-    });
   }
 
   return (
@@ -45,7 +52,7 @@ export default function Add() {
 
       <View style={styles.form}>
         <Input placeholder="Nome da URL" onChangeText={setName} autoCorrect={false} />
-        <Input placeholder="URL" onChangeText={setUrl} autoCorrect={false} />
+        <Input placeholder="URL" onChangeText={setUrl} autoCorrect={false} autoCapitalize="none" />
         <Button title="Adicionar" onPress={handleAdd} />
       </View>
     </View>
