@@ -28,13 +28,7 @@ export default function Index() {
       <FlatList
         data={["1", "2", "3", "4", "5"]}
         keyExtractor={(item) => item}
-        renderItem={() => (
-          <Link
-            name="Google"
-            url="https://www.google.com.br/?hl=pt-BR"
-            onDetails={() => {}}
-          />
-        )}
+        renderItem={() => <Link name="Google" url="https://www.google.com.br/?hl=pt-BR" onDetails={() => {}} />}
         style={styles.links}
         contentContainerStyle={styles.linksContent}
         showsVerticalScrollIndicator={false}
