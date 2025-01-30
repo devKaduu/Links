@@ -8,9 +8,9 @@ import { categories } from "@/utils/categories";
 import { Categories } from "@/components/categories";
 import { Link } from "@/components/link";
 import { Option } from "@/components/option";
-import { router } from "expo-router";
-import { useEffect, useState } from "react";
-import { eraseAllData, getPersistedDataLinks, LinksStorage } from "@/utils/storage";
+import { router, useFocusEffect } from "expo-router";
+import { useCallback, useState } from "react";
+import { getPersistedDataLinks, LinksStorage } from "@/utils/storage";
 
 export default function Index() {
   const [category, setCategory] = useState<string>(categories[0].name);
@@ -25,9 +25,11 @@ export default function Index() {
     }
   }
 
-  useEffect(() => {
-    getLinks();
-  }, [category, links]);
+  useFocusEffect(
+    useCallback(() => {
+      getLinks();
+    }, [])
+  );
 
   return (
     <View style={styles.container}>
