@@ -13,8 +13,10 @@ import { useCallback, useState } from "react";
 import { getPersistedDataLinks, LinksStorage } from "@/utils/storage";
 
 export default function Index() {
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [category, setCategory] = useState<string>(categories[0].name);
   const [links, setLinks] = useState<LinksStorage[]>([]);
+  const [selectedLink, setSelectedLink] = useState<LinksStorage>({} as LinksStorage);
 
   async function getLinks() {
     try {
@@ -25,6 +27,11 @@ export default function Index() {
     }
   }
 
+  function handleDetails(selected: LinksStorage) {
+    setShowModal(true);
+    setSelectedLink(selected);
+  }
+
   useFocusEffect(
     useCallback(() => {
       getLinks();
@@ -32,7 +39,7 @@ export default function Index() {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, showModal && styles.modalOpen]}>
       <View style={styles.header}>
         <Image source={require("@/assets/logo.png")} style={styles.logo} />
         <TouchableOpacity onPress={() => router.navigate("/add")}>
@@ -45,23 +52,23 @@ export default function Index() {
       <FlatList
         data={links}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Link name={item.name} url={item.url} onDetails={() => {}} />}
+        renderItem={({ item }) => <Link name={item.name} url={item.url} onDetails={() => handleDetails(item)} />}
         style={styles.links}
         contentContainerStyle={styles.linksContent}
         showsVerticalScrollIndicator={false}
       />
 
-      <Modal transparent visible={false}>
+      <Modal transparent visible={showModal} animationType="slide">
         <View style={styles.modal}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
-              <Text style={styles.modalCategory}>Curso</Text>
-              <TouchableOpacity>
+              <Text style={styles.modalCategory}>{selectedLink.category}</Text>
+              <TouchableOpacity onPress={() => setShowModal(false)}>
                 <MaterialIcons name="close" size={20} color={colors.gray[400]} />
               </TouchableOpacity>
             </View>
-            <Text style={styles.modalLinkName}>Google</Text>
-            <Text style={styles.modalUrl}>https://www.google.com.br/?hl=pt-B</Text>
+            <Text style={styles.modalLinkName}>{selectedLink.name}</Text>
+            <Text style={styles.modalUrl}>{selectedLink.url}</Text>
 
             <View style={styles.modalFooter}>
               <Option name="Excluir" icon="delete" variant="secondary" />

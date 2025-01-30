@@ -73,6 +73,9 @@ const styles = StyleSheet.create({
     borderTopColor: colors.gray[600],
     paddingVertical: 14,
   },
+  modalOpen: {
+    opacity: 0.5,
+  },
 });
 
 export default styles;
