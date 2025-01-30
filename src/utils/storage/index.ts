@@ -44,10 +44,14 @@ export async function persistDataLinks(newLink: LinksStorage) {
   }
 }
 
-export const eraseAllData = async () => {
+export async function removeDataLink(id: string) {
   try {
-    await AsyncStorage.clear();
+    const links = await getPersistedDataLinks();
+
+    const updated = links.filter((link) => link.id !== id);
+
+    await AsyncStorage.setItem(LINKS_STORAGE_KEY, JSON.stringify(updated));
   } catch (error) {
-    console.error("Failed to persist data", error);
+    throw error;
   }
-};
+}

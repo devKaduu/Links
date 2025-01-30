@@ -1,4 +1,4 @@
-import { Image, View, TouchableOpacity, FlatList, Modal, Text, Alert } from "react-native";
+import { Image, View, TouchableOpacity, FlatList, Modal, Text, Alert, Linking } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import styles from "./styles";
 import { colors } from "@/styles/colors";
@@ -10,13 +10,15 @@ import { Link } from "@/components/link";
 import { Option } from "@/components/option";
 import { router, useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
-import { getPersistedDataLinks, LinksStorage } from "@/utils/storage";
+import { getPersistedDataLinks, LinksStorage, removeDataLink } from "@/utils/storage";
 
 export default function Index() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [category, setCategory] = useState<string>(categories[0].name);
   const [links, setLinks] = useState<LinksStorage[]>([]);
   const [selectedLink, setSelectedLink] = useState<LinksStorage>({} as LinksStorage);
+
+  console.log(selectedLink);
 
   async function getLinks() {
     try {
@@ -30,6 +32,25 @@ export default function Index() {
   function handleDetails(selected: LinksStorage) {
     setShowModal(true);
     setSelectedLink(selected);
+  }
+
+  async function handleRemoveLink() {
+    try {
+      await removeDataLink(selectedLink.id);
+      getLinks();
+      setShowModal(false);
+    } catch (error) {
+      Alert.alert("Erro", "Ocorreu um erro ao remover o link");
+    }
+  }
+
+  async function handleOpenLink() {
+    try {
+      await Linking.openURL(selectedLink.url);
+      setShowModal(false);
+    } catch (error) {
+      Alert.alert("Erro", "Ocorreu um erro ao abrir o link");
+    }
   }
 
   useFocusEffect(
@@ -71,8 +92,8 @@ export default function Index() {
             <Text style={styles.modalUrl}>{selectedLink.url}</Text>
 
             <View style={styles.modalFooter}>
-              <Option name="Excluir" icon="delete" variant="secondary" />
-              <Option name="Abrir" icon="language" />
+              <Option name="Excluir" icon="delete" variant="secondary" onPress={handleRemoveLink} />
+              <Option name="Abrir" icon="language" onPress={handleOpenLink} />
             </View>
           </View>
         </View>
