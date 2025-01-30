@@ -18,7 +18,7 @@ export default function Index() {
 
   async function getLinks() {
     try {
-      const response = await getPersistedDataLinks();
+      const response = (await getPersistedDataLinks()).filter((link) => link.category === category);
       setLinks(response);
     } catch (error) {
       Alert.alert("Erro", "Ocorreu um erro ao recuperar os links");
@@ -28,7 +28,7 @@ export default function Index() {
   useFocusEffect(
     useCallback(() => {
       getLinks();
-    }, [])
+    }, [category])
   );
 
   return (

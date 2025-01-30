@@ -45,7 +45,7 @@ export default function Add() {
         <TouchableOpacity onPress={() => router.back()}>
           <MaterialIcons name="arrow-back" size={32} color={colors.gray[200]} />
         </TouchableOpacity>
-        <Text style={styles.title}>Novo</Text>
+        <Text style={styles.title}>Adicionando Novo Link</Text>
       </View>
 
       <Text style={styles.label}>Selecione uma categoria</Text>
