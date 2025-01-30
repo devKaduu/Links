@@ -18,8 +18,6 @@ export default function Index() {
   const [links, setLinks] = useState<LinksStorage[]>([]);
   const [selectedLink, setSelectedLink] = useState<LinksStorage>({} as LinksStorage);
 
-  console.log(selectedLink);
-
   async function getLinks() {
     try {
       const response = (await getPersistedDataLinks()).filter((link) => link.category === category);
