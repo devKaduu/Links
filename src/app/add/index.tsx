@@ -32,6 +32,8 @@ export default function Add() {
         url,
         category,
       });
+
+      router.back();
     } catch (error) {
       Alert.alert("Erro", "Ocorreu um erro ao adicionar o link");
     }
